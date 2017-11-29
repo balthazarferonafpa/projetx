@@ -23,8 +23,6 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     }
 
 
-
-
     public List<Utilisateur> findAllUtilisateurs() {
         return dao.findAllUtilisateurs();
     }
@@ -32,8 +30,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
 
 
-	@Override
-	public Utilisateur findById(long id) {		 
+	public Utilisateur findById(long id) {
         return (Utilisateur) dao.findById(id); 
 	}
 
