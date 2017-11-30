@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface ProjectRepository {
+public interface ProjectDAO {
 
     public void createProject(Project project);
     public void updateProject(Project project);

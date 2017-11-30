@@ -1,8 +1,13 @@
 package fr.afpa.projetx.DAO;
 
 import fr.afpa.projetx.models.Role;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-public class RoleRepositoryImpl extends AbstractDao implements RoleRepository {
+
+@Repository("RoleDao")
+@Transactional
+public class RoleDAOImpl extends AbstractDao<Integer, Role> implements RoleDAO {
     @Override
     public void addRole(Role role) {
         getSession().persist(role);

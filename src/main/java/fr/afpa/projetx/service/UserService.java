@@ -1,4 +1,4 @@
-package fr.afpa.projetx.DAO;
+package fr.afpa.projetx.service;
 
 import fr.afpa.projetx.models.User;
 import org.springframework.stereotype.Repository;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface UserRepository{
+public interface UserService {
 
     public void createUser(User user);
     public void updateUser(User user);

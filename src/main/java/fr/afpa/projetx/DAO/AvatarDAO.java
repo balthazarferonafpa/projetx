@@ -8,7 +8,7 @@ import fr.afpa.projetx.models.Avatar;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface AvatarRepository {
+public interface AvatarDAO {
 
     public void createAvatar(Avatar avatar);
     public void updateAvatar(Avatar avatar);

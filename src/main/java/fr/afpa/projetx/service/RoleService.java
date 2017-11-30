@@ -1,7 +1,7 @@
-package fr.afpa.projetx.DAO;
+package fr.afpa.projetx.service;
 
-import org.springframework.stereotype.Repository;
 import fr.afpa.projetx.models.Role;
+import org.springframework.stereotype.Repository;
 
 
 /**
@@ -9,7 +9,7 @@ import fr.afpa.projetx.models.Role;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface RoleRepository {
+public interface RoleService {
 
     public void addRole(Role role);
     public void updateRole(Role role);

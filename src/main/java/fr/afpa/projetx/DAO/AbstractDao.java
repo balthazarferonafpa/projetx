@@ -3,6 +3,7 @@ package fr.afpa.projetx.DAO;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.mapping.PersistentClass;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;

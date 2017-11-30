@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface TaskRepository {
+public interface TaskDAO {
 
     public void createTask(Task task);
     public void updateTask(Task task);

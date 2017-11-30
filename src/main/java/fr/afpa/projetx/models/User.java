@@ -14,6 +14,18 @@ import java.util.Objects;
 @Table(name = "worker")
 public class User implements Serializable {
 
+    public User(String firstname, String lastname, String email, String password, String skill, Boolean enabled, Set<Role> roles, Avatar avatar, Set<Project> projects) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+        this.skill = skill;
+        this.enabled = enabled;
+        this.roles = roles;
+        this.avatar = avatar;
+        this.projects = projects;
+    }
+
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -29,15 +41,17 @@ public class User implements Serializable {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "jhi_password")
+    @Column(name = "password")
     private String password;
 
     @Column(name = "skill")
     private String skill;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Role role;
+    @Column(name="enabled")
+    private Boolean enabled;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private Set<Role> roles;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -123,17 +137,20 @@ public class User implements Serializable {
         this.skill = skill;
     }
 
-    public Role getRole() {
-        return role;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public User role(Role role) {
-        this.role = role;
-        return this;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     public Avatar getAvatar() {

@@ -18,7 +18,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan({ "fr.afpa.projetx.configuration" })
+@ComponentScan({ "fr.afpa.projetx.config" })
 @PropertySource(value = {"/WEB-INF/resources/application.properties"})
 public class HibernateConfiguration {
 

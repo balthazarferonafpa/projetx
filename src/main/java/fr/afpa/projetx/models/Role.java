@@ -17,11 +17,12 @@ public class Role implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "email", nullable = false)
+    private User user;
     @Column(name = "name")
     private String name;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
@@ -42,7 +43,6 @@ public class Role implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {
