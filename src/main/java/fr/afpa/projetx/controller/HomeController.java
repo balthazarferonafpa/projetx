@@ -26,13 +26,6 @@ public class HomeController {
 	
 	@GetMapping("/home")
 	public ModelAndView hello(HttpServletRequest request) {
-		Utilisateur u = new Utilisateur();
-		u.setPassword("test");
-		u.setUsername("username");
-		utilisteurService.saveUtilisateur(u);
-		List<Utilisateur> users = utilisteurService.findAllUtilisateurs();
-		System.out.println(users);
-		ModelAndView model = new ModelAndView("home");
 		
 		model.addObject("name", "Spring Boys");
 		model.addObject("users", users);
