@@ -12,4 +12,5 @@ public interface UserService {
 
     public void createUser(User user);
     public void updateUser(User user);
+    public User findByEmail(String email);
 }

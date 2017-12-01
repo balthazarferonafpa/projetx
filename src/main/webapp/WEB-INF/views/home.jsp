@@ -13,7 +13,9 @@
 	<c:forEach items="${users}" var="user">
 		<c:out value="${user.username}"/>
 	</c:forEach>
-	
+
+
+<c:out value="${user}"></c:out>
 	
 </body>
 </html>

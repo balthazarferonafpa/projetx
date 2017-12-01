@@ -9,28 +9,33 @@ import java.util.Objects;
  * A Avatar.
  */
 @Entity
-@Table(name = "avatar")
+@Table(name = "avatars")
 public class Avatar implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id_avatar;
 
     @Column(name = "nom")
     private String nom;
 
     @Column(name = "url")
     private String url;
+    @OneToOne(fetch = FetchType.LAZY)
+    @PrimaryKeyJoinColumn
+    private User user;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
-    public Long getId() {
-        return id;
+
+
+    public Long getId_avatar() {
+        return id_avatar;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId_avatar(Long id_avatar) {
+        this.id_avatar = id_avatar;
     }
 
     public String getNom() {
@@ -50,15 +55,25 @@ public class Avatar implements Serializable {
         return url;
     }
 
-    public Avatar url(String url) {
-        this.url = url;
-        return this;
-    }
 
     public void setUrl(String url) {
         this.url = url;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Avatar url(String url) {
+        this.url = url;
+        return this;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -69,21 +84,21 @@ public class Avatar implements Serializable {
             return false;
         }
         Avatar avatar = (Avatar) o;
-        if (avatar.getId() == null || getId() == null) {
+        if (avatar.getId_avatar() == null || getId_avatar() == null) {
             return false;
         }
-        return Objects.equals(getId(), avatar.getId());
+        return Objects.equals(getId_avatar(), avatar.getId_avatar());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return Objects.hashCode(getId_avatar());
     }
 
     @Override
     public String toString() {
         return "Avatar{" +
-            "id=" + getId() +
+            "id=" + getId_avatar() +
             ", nom='" + getNom() + "'" +
             ", url='" + getUrl() + "'" +
             "}";

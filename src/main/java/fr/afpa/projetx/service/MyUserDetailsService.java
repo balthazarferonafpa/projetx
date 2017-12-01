@@ -1,6 +1,5 @@
 package fr.afpa.projetx.service;
 
-import fr.afpa.projetx.DAO.TaskDAO;
 import fr.afpa.projetx.DAO.UserDAO;
 import fr.afpa.projetx.models.Role;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +29,7 @@ public class MyUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(final String email) throws UsernameNotFoundException {
 
+
         fr.afpa.projetx.models.User user = userDAO.findByEmail(email);
         List<GrantedAuthority> authorities =
                 buildUserAuthority(user.getRoles());
@@ -41,6 +41,7 @@ public class MyUserDetailsService implements UserDetailsService {
     // Converts com.mkyong.users.model.User user to
     // org.springframework.security.core.userdetails.User
     private org.springframework.security.core.userdetails.User buildUserForAuthentication(fr.afpa.projetx.models.User user, List<GrantedAuthority> authorities) {
+
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), user.getEnabled(), true, true, true, authorities);
     }
 

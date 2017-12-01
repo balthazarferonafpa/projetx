@@ -21,6 +21,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     UserDetailsService userDetailsService;
 
     @Autowired
+    customLoginSuccessHandler customLoginSuccessHandler;
+
+    @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
@@ -28,11 +31,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.authorizeRequests().antMatchers("/admin/**", "/home")
-                .access("hasRole('ROLE_ADMIN')").and().formLogin()
-                .loginPage("/login").failureUrl("/login?error")
-                .usernameParameter("email")
-                .passwordParameter("password")
+        http.authorizeRequests()
+                .antMatchers("/").access("hasRole('ROLE_USER')")
+                .antMatchers("/home/").access("hasRole('ROLE_ADMIN')").and().formLogin()
+                .loginPage("/login").successHandler(customLoginSuccessHandler).failureUrl("/login?error")
+                .usernameParameter("username")
+                .passwordParameter("email")
                 .and().logout().logoutSuccessUrl("/login?logout")
                 .and().csrf()
                 .and().exceptionHandling().accessDeniedPage("/403");

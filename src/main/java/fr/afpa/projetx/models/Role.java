@@ -3,32 +3,32 @@ package fr.afpa.projetx.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Objects;
 
 /**
  * A Role.
  */
 @Entity
-@Table(name = "role")
+@Table(name = "roles")
 public class Role implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "email", nullable = false)
-    private User user;
+    private Long id_role;
     @Column(name = "name")
     private String name;
+    @ManyToMany(mappedBy ="roles", fetch = FetchType.EAGER)
+    private Collection<User> users;
 
-    public Long getId() {
-        return id;
+    public Long getId_role() {
+        return id_role;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId_role(Long id_role) {
+        this.id_role = id_role;
     }
 
     public String getName() {
@@ -53,21 +53,21 @@ public class Role implements Serializable {
             return false;
         }
         Role role = (Role) o;
-        if (role.getId() == null || getId() == null) {
+        if (role.getId_role() == null || getId_role() == null) {
             return false;
         }
-        return Objects.equals(getId(), role.getId());
+        return Objects.equals(getId_role(), role.getId_role());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return Objects.hashCode(getId_role());
     }
 
     @Override
     public String toString() {
         return "Role{" +
-            "id=" + getId() +
+            "id=" + getId_role() +
             ", name='" + getName() + "'" +
             "}";
     }

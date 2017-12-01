@@ -11,26 +11,15 @@ import java.util.Objects;
  * A User.
  */
 @Entity
-@Table(name = "worker")
+@Table(name = "users")
 public class User implements Serializable {
 
-    public User(String firstname, String lastname, String email, String password, String skill, Boolean enabled, Set<Role> roles, Avatar avatar, Set<Project> projects) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.email = email;
-        this.password = password;
-        this.skill = skill;
-        this.enabled = enabled;
-        this.roles = roles;
-        this.avatar = avatar;
-        this.projects = projects;
-    }
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id_user;
 
     @Column(name = "firstname")
     private String firstname;
@@ -50,26 +39,45 @@ public class User implements Serializable {
     @Column(name="enabled")
     private Boolean enabled;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    private Set<Role> roles;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(
+                    name = "id_user", referencedColumnName = "id_user"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "id_role", referencedColumnName = "id_role"))
+    private Set<Role> roles = new HashSet<Role>(0);
 
-    @OneToOne
-    @JoinColumn(unique = true)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
     private Avatar avatar;
 
     @ManyToMany
-    @JoinTable(name = "worker_projects",
-               joinColumns = @JoinColumn(name="workers_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="projects_id", referencedColumnName="id"))
+    @JoinTable(name = "user_projects",
+               joinColumns = @JoinColumn(name="id_user"),
+               inverseJoinColumns = @JoinColumn(name="id_project"))
     private Set<Project> projects = new HashSet<>();
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
-    public Long getId() {
-        return id;
+
+    public User(String firstname, String lastname, String email, String password, String skill, Boolean enabled, Set<Role> roles, Avatar avatar, Set<Project> projects) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+        this.skill = skill;
+        this.enabled = enabled;
+        this.roles = roles;
+        this.avatar = avatar;
+        this.projects = projects;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public User(){}
+
+    public Long getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(Long id_user) {
+        this.id_user = id_user;
     }
 
     public String getFirstname() {
@@ -201,21 +209,21 @@ public class User implements Serializable {
             return false;
         }
         User user = (User) o;
-        if (user.getId() == null || getId() == null) {
+        if (user.getId_user() == null || getId_user() == null) {
             return false;
         }
-        return Objects.equals(getId(), user.getId());
+        return Objects.equals(getId_user(), user.getId_user());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return Objects.hashCode(getId_user());
     }
 
     @Override
     public String toString() {
         return "User{" +
-            "id=" + getId() +
+            "id=" + getId_user() +
             ", firstname='" + getFirstname() + "'" +
             ", lastname='" + getLastname() + "'" +
             ", email='" + getEmail() + "'" +
