@@ -13,4 +13,5 @@ public interface UserDAO {
     public void createUser(User user);
     public void updateUser(User user);
     public User findByEmail(String email);
+    public int verifierEmail(String email) throws DAOException;
 }

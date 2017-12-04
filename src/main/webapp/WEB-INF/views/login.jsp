@@ -1,55 +1,54 @@
 <%--
   Created by IntelliJ IDEA.
   User: 34011-79-19
-  Date: 30/11/2017
-  Time: 16:56
+  Date: 22/08/2017
+  Time: 16:45
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Login page</title>
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
+    <%--<script src="<c:url value="/resources/js/jquery3.2.1.js"/>"></script>--%>
+    <%--<script src="<c:url value="/resources/bootstrap/js/bootstrap.js"/>"></script>--%>
+    <%--<link rel="stylesheet" type="text/css" href="<c:url value="/resources/bootstrap/css/bootstrap.min.css"/> ">--%>
+    <%--<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/main.css"/> ">--%>
+    <%@include file="includes.jsp" %>
+    <title>Projet-X | Login</title>
 </head>
-
 <body>
-<div id="mainWrapper">
-    <div class="login-container">
-        <div class="login-card">
-            <div class="login-form">
-                <c:url var="loginUrl" value="/j_spring_security_check" />
-                <form action="${loginUrl}" method="post" class="form-horizontal">
-                    <c:if test="${param.error != null}">
-                        <div class="alert alert-danger">
-                            <p>Invalid username and password.</p>
-                        </div>
-                    </c:if>
-                    <c:if test="${param.logout != null}">
-                        <div class="alert alert-success">
-                            <p>You have been logged out successfully.</p>
-                        </div>
-                    </c:if>
-                    <div class="input-group input-sm">
-                        <label class="input-group-addon" for="username"><i class="fa fa-user"></i></label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username" required>
-                    </div>
-                    <div class="input-group input-sm">
-                        <label class="input-group-addon" for="password"><i class="fa fa-lock"></i></label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
-                    </div>
-                    <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}" />
+<%@include file="nav.jsp" %>
 
-                    <div class="form-actions">
-                        <input type="submit"
-                               class="btn btn-block btn-primary btn-default" value="Log in">
-                    </div>
-                </form>
+
+
+<div class="container-fluid col-10 col-lg-10 cols-xs-10 col-sm-10 offset-1  inscription">
+
+    <div class="card ">
+        <h3 class="card-header card-primary">Login :</h3>
+        <c:url var="loginUrl" value="/login" />
+        <form:form method="POST" action="${loginUrl}" modelAttribute="u">
+        <div class="card-block">
+
+            <div class="form-group">
+                <form:input path="email" class="form-control" placeholder="Pseudo" type="text"/>
             </div>
+            <div class="form-group">
+                <form:input path="password" class="form-control" placeholder="Mot de Passe" type="password"/>
+            </div>
+            <a href="/reset"><button class="btn btn-primary pull-left" type="button">Identifiants Oubliés</button></a>
+            <a href="/register"><button class="btn btn-primary pull-left" type="button">Inscription</button></a>
+            <button class="btn btn-success  float-right" type="submit">Connexion</button>
         </div>
+
+
     </div>
+
 </div>
 
+</form:form>
+
+
+<%@include file="footer.jsp" %>
 </body>
 </html>

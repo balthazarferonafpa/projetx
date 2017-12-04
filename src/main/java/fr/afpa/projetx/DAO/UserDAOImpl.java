@@ -5,6 +5,7 @@ import fr.afpa.projetx.models.User;
 import java.util.List;
 import java.util.*;
 
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,5 +41,16 @@ public class UserDAOImpl extends AbstractDao<Integer, User> implements UserDAO {
             return null;
         }
 
+    }
+
+    @Override
+    public int verifierEmail(String email) throws DAOException{
+        Query query = getSession().createQuery("from User where email = ?");
+        query.setParameter(0, email);
+        System.out.println(query);
+
+        List<User> users = query.list();
+        System.out.println(users.size());
+       return users.size();
     }
 }

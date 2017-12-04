@@ -1,5 +1,6 @@
 package fr.afpa.projetx.service;
 
+import fr.afpa.projetx.DAO.DAOException;
 import fr.afpa.projetx.DAO.UserDAO;
 import fr.afpa.projetx.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByEmail(String email) {
         return userDAO.findByEmail(email);
+    }
+
+    @Override
+    public int verifierEmail(String email) throws DAOException {
+        return userDAO.verifierEmail(email);
     }
 }

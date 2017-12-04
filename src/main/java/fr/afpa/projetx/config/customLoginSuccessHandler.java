@@ -43,11 +43,15 @@ public class customLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHan
             roles.add(a.getAuthority());
         }
 
-         if (isAdmin(roles) || isUser(roles)) {
-            url = "/home";
-        } else {
+         if (isAdmin(roles)) {
+            url = "/admin";
+        }else if(isUser(roles)){
+             url = "/dashboard";
+        }else {
             url="/accessDenied";
         }
+
+        System.out.println("URL :: "+url);
 
         return url;
     }

@@ -31,6 +31,10 @@ public class MyUserDetailsService implements UserDetailsService {
 
 
         fr.afpa.projetx.models.User user = userDAO.findByEmail(email);
+
+        System.out.println("LoadByUserName : "+email);
+        System.out.println("Roles : "+user.getRoles());
+
         List<GrantedAuthority> authorities =
                 buildUserAuthority(user.getRoles());
 
@@ -52,11 +56,12 @@ public class MyUserDetailsService implements UserDetailsService {
 
         // Build user's authorities
         for (Role userRole : userRoles) {
+            System.out.println(userRole);
             setAuths.add(new SimpleGrantedAuthority(userRole.getName()));
         }
 
         List<GrantedAuthority> Result = new ArrayList<GrantedAuthority>(setAuths);
-
+        System.out.println("Rseult : "+ Result);
         return Result;
     }
 

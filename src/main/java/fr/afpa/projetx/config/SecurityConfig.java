@@ -31,12 +31,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.authorizeRequests()
-                .antMatchers("/").access("hasRole('ROLE_USER')")
-                .antMatchers("/home/").access("hasRole('ROLE_ADMIN')").and().formLogin()
-                .loginPage("/login").successHandler(customLoginSuccessHandler).failureUrl("/login?error")
-                .usernameParameter("username")
-                .passwordParameter("email")
+        http.authorizeRequests().antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/test/**").access("hasRole('ROLE_USER')")
+                .and().formLogin().successHandler(customLoginSuccessHandler)
+                .loginPage("/login").failureUrl("/login?error")
+                .usernameParameter("email")
+                .passwordParameter("password")
                 .and().logout().logoutSuccessUrl("/login?logout")
                 .and().csrf()
                 .and().exceptionHandling().accessDeniedPage("/403");

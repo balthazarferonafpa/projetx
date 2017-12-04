@@ -23,4 +23,9 @@ public class RoleServiceImpl implements RoleService {
     public void updateRole(Role role) {
         roleDAO.updateRole(role);
     }
+
+    @Override
+    public Role getRole(String type) {
+        return roleDAO.getRole(type);
+    }
 }
